@@ -15,7 +15,7 @@ struct ContentView: View {
         NavigationView {
             Form {
                 Picker("Wähle Deine Pizza aus", selection: $pizza.pizzaTypeIndex) {
-                    ForEach(0..<Pizza.pizzaTypes.count) { index in
+                    ForEach(0..<Pizza.pizzaTypes.count, id: \.self) { index in// id: Добавил сам
                         Text(Pizza.pizzaTypes[index]).tag(index)
                     }
                 }
