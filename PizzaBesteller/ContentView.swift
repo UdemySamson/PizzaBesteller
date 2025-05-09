@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var pizza = Pizza()
+    @State private var selectedIndex = 0
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            Form {
+                Picker("Wähle Deine Pizza aus", selection: $pizza.pizzaTypeIndex) {
+                    ForEach(0..<Pizza.pizzaTypes.count) { index in
+                        Text(Pizza.pizzaTypes[index]).tag(index)
+                    }
+                }
+            }
+            .navigationBarTitle("Pizza Bestellen")
         }
-        .padding()
     }
 }
 
