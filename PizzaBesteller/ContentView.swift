@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var pizza = Pizza()
-    @State private var selectedIndex = 0
+    @State var showingConfirmation = false
     
     var body: some View {
         NavigationView {
@@ -35,11 +35,21 @@ struct ContentView: View {
                 }
                 
                 Section(header: Text("Lieferung")) {
-                    Text("Lieferung...")
+                    TextField("Name", text: $pizza.name)
+                    TextField("Adresse", text: $pizza.streetAdresse)
+                    TextField("Stadt", text: $pizza.city)
                 }
                 
+                Section {
+                    Button(action: {showingConfirmation = true}) {
+                        Text("Kostenpflichtig bestellen")
+                    }.disabled(pizza.isInvalid)
+                }
             }
             .navigationBarTitle("Pizza Bestellen")
+            .alert(isPresented: $showingConfirmation) {
+                Alert(title: Text("Vielen Dank für Ihre Bestellung!"), message: Text("Wir werden Ihre Bestellung in den nächsten 10-15 Minuten liefern."), dismissButton: .cancel())
+            }
         }
     }
 }
