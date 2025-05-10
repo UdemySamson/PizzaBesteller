@@ -14,14 +14,14 @@ class Pizza: ObservableObject {
     
     @Published var anzahl = 1
     
-    static let pizzaSize = ["Klein", "Mittel", "Groß"]
+    static let pizzaSizes = ["Klein", "Mittel", "Groß"]
     @Published var pizzaSizeIndex = 0
     
     @Published var name = ""
-    @Published var streetAdresse = ""
+    @Published var streetAddress = ""
     @Published var city = ""
     
     var isInvalid: Bool {
-        name.isEmpty || streetAdresse.isEmpty || city.isEmpty
+        name.isEmpty || streetAddress.isEmpty || city.isEmpty
     }
 }

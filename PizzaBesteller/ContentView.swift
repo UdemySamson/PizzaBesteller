@@ -27,8 +27,8 @@ struct ContentView: View {
                 
                 Section {
                     Picker("", selection: $pizza.pizzaSizeIndex) {
-                        ForEach(0..<Pizza.pizzaSize.count, id: \.self) {
-                            Text(Pizza.pizzaSize[$0]).tag($0)
+                        ForEach(0..<Pizza.pizzaSizes.count, id: \.self) {
+                            Text(Pizza.pizzaSizes[$0]).tag($0)
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
@@ -36,7 +36,7 @@ struct ContentView: View {
                 
                 Section(header: Text("Lieferung")) {
                     TextField("Name", text: $pizza.name)
-                    TextField("Adresse", text: $pizza.streetAdresse)
+                    TextField("Adresse", text: $pizza.streetAddress)
                     TextField("Stadt", text: $pizza.city)
                 }
                 
@@ -48,7 +48,7 @@ struct ContentView: View {
             }
             .navigationBarTitle("Pizza Bestellen")
             .alert(isPresented: $showingConfirmation) {
-                Alert(title: Text("Vielen Dank für Ihre Bestellung!"), message: Text("Wir werden Ihre Bestellung in den nächsten 10-15 Minuten liefern."), dismissButton: .cancel())
+                Alert(title: Text("Vielen Dank für Ihre Bestellung!"), message: Text("Ihre Bestellung (\(pizza.anzahl) x Pizza \(Pizza.pizzaTypes[pizza.pizzaTypeIndex]) in der Größe \(Pizza.pizzaSizes[pizza.pizzaSizeIndex]) wird in kürze an die folgende Adresse geliefert:\nName:  \(pizza.name)\nStraße: \(pizza.streetAddress)\nStadt: \(pizza.city)"), dismissButton: .cancel())
             }
         }
     }
